@@ -1,0 +1,126 @@
+﻿@using System
+@{
+    // 404 Not Found
+    //
+    // This view was added by NotFoundMVC
+    // For inspiration see: https://www.google.be/search?q=example+404+page
+    //
+    // The following properties are available in the ViewBag:
+    // ViewData["RequestedUrl"]
+    // ViewData["ReferrerUrl"]
+    //
+
+    ViewBag.Title = "Page Not Found";
+}
+
+@{
+    Layout = null;
+}
+
+@*<h1>Page Not Found</h1>*@
+@**@
+@*<p>Could not find the page: @ViewBag.RequestedUrl</p>*@
+@*@if (ViewBag.ReferrerUrl != null)*@
+@*{*@
+@*    <p>Go back to the <a href="@ViewBag.ReferrerUrl">previous page</a>.</p>*@
+@*}*@
+@**@
+@*<script type="text/javascript">*@
+@*    var GOOG_FIXURL_LANG = '@System.Globalization.CultureInfo.CurrentCulture.Name.Substring(0,2)';*@
+@*    var GOOG_FIXURL_SITE = '@Request.Url.GetLeftPart(UriPartial.Authority)'*@
+@*</script>*@
+@*<script type="text/javascript" src="//linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js"></script>*@
+@**@
+@*$1$ Error page must be longer than 512 bytes for IE and Chrome to show it. So add padding in case we're short. #1#*@
+@*@(new string(' ', 512))*@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Free error 404 for Website Template | Home :: w3layouts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href='http://fonts.googleapis.com/css?family=Courgette' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        body {
+            font-family: 'Courgette', cursive;
+        }
+
+        body {
+            background: #2f4050;
+        }
+
+        .wrap {
+            margin: 0 auto;
+            width: 1000px;
+        }
+
+        .logo {
+            margin-top: 50px;
+        }
+
+            .logo h1 {
+                font-size: 200px;
+                color: #000;
+                text-align: center;
+                margin-bottom: 1px;
+                text-shadow: 1px 1px 6px #fff;
+            }
+
+            .logo p {
+                color: #fff;
+                font-size: 20px;
+                margin-top: 1px;
+                text-align: center;
+            }
+
+                .logo p span {
+                    color: lightgreen;
+                }
+
+        .sub a {
+            color: white;
+            background: #00897B;
+            text-decoration: none;
+            padding: 7px 120px;
+            font-size: 13px;
+            font-family: arial, serif;
+            font-weight: bold;
+            -webkit-border-radius: 3em;
+            -moz-border-radius: .1em;
+            -border-radius: .1em;
+        }
+
+        .footer {
+            color: #2f4050;
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+
+            .footer a {
+                color: rgb(228, 146, 162);
+            }
+    </style>
+</head>
+
+
+<body>
+    <div class="wrap">
+        <div class="logo">
+            <h1>404</h1>
+            <p>Error occured! - File not Found</p>
+            <div class="sub">
+                <p>
+                    <a href="javascript: history.back()">Back</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+
+    </div>
+
+</body>
+</html>
