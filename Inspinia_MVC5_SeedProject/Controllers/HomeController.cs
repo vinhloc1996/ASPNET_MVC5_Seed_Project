@@ -27,12 +27,14 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(User LoginUser, string returnUrl)
+        public ActionResult Login(User loginUser, string returnUrl)
         {
-            User user = GetUser(LoginUser.username, LoginUser.password);
+            User user = GetUser(loginUser.username, loginUser.password);
             if (user != null)
             {
                 Session["username"] = user.username;
+                Session["isAccessAll"] = user.isAccessAll.ToString();
+                Session["branch_id"] = user.branch_id;
 
                 return RedirectToLocal(returnUrl);
             }

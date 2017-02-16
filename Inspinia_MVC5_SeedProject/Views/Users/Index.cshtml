@@ -22,64 +22,69 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>List of User</h5>
-					<div class="ibox-tools">
-						@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary btn-xs"})
-					</div>
+                    <div class="ibox-tools">
+                        @Html.ActionLink("Create New", "Create", null, new {@class = "btn btn-primary btn-xs"})
+                    </div>
                 </div>
                 <div class="ibox-content">
 
-<table class="table table-striped">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Branch.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isAccessAll)
-        </th>
-        <th></th>
-    </tr>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Branch.name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.username)
+                            </th>
+@*                            <th>*@
+@*                                @Html.DisplayNameFor(model => model.password)*@
+@*                            </th>*@
+                            <th>
+                                @Html.DisplayNameFor(model => model.email)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.address)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.isAccessAll)
+                            </th>
+                            <th></th>
+                        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Branch.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isAccessAll)
-        </td>
-        <td>
-			@Html.ActionLink("Details", "Details", new { id=item.username }, new { @class = "btn btn-primary btn-sm"})
-            @Html.ActionLink("Edit", "Edit", new { id=item.username }, new { @class = "btn btn-white btn-sm"})
-            @Html.ActionLink("Delete", "Delete", new { id=item.username }, new { @class = "btn btn-white btn-sm"})
-        </td>
-    </tr>
-}
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Branch.name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.username)
+                                </td>
+@*                                <td>*@
+@*                                    @Html.DisplayFor(modelItem => item.password)*@
+@*                                </td>*@
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.address)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.isAccessAll)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Details", "Details", new {id = item.username}, new {@class = "btn btn-primary btn-sm"})
+                                    @Html.ActionLink("Edit", "Edit", new {id = item.username}, new {@class = "btn btn-white btn-sm"})
+                                    @Html.ActionLink("Delete", "Delete", new {id = item.username}, new {@class = "btn btn-white btn-sm"})
+                                    @Html.ActionLink("Reset Password", "ResetPassword", new { id = item.username }, new { @class = "btn btn-info btn-sm" })
+                                </td>
+                            </tr>
+                        }
 
-</table>
+                    </table>
 
                 </div>
             </div>
         </div>
     </div>
- </div>
-
-
-
+</div>

@@ -18,7 +18,7 @@
     </div>
     <div class="col-sm-8">
         <div class="title-action">
-			@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary"})
+            @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-primary"})
         </div>
     </div>
 </div>
@@ -32,58 +32,59 @@
                     <h5>User</h5>
                 </div>
                 <div class="ibox-content">
-				<h4 class="text-danger">Are you sure you want to delete this?</h4>
-				 <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Branch.name)
-        </dt>
+                    <h4 class="text-danger">Are you sure you want to delete this?</h4>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Branch.name)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Branch.name)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Branch.name)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.password)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.password)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.password)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.password)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.email)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.email)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.email)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.email)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.address)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.address)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.address)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.address)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.isAccessAll)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.isAccessAll)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.isAccessAll)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.isAccessAll)
+                        </dd>
 
-    </dl>
+                    </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-primary" />
-            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-white"})
-        </div>
-    }
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Delete" class="btn btn-primary"/>
+                            @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-white"})
+                        </div>
+                    }
 
 
 
@@ -91,6 +92,4 @@
             </div>
         </div>
     </div>
- </div>
-
-
+</div>

@@ -18,12 +18,21 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         public ActionResult Index()
         {
             var users = db.Users.Include(u => u.Branch);
-            return View(users.ToList());
+            if (Session["isAccessAll"].Equals("False"))
+            {
+                int a = db.Users.Find(Session["username"]).branch_id;
+                return View(users.Where(c => c.branch_id == a));
+            }
+                return View(users.ToList());
         }
 
         // GET: /Users/Details/5
         public ActionResult Details(string id)
         {
+            if (Session["isAccessAll"].Equals("False"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,6 +48,10 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         // GET: /Users/Create
         public ActionResult Create()
         {
+            if (Session["isAccessAll"].Equals("False"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             ViewBag.branch_id = new SelectList(db.Branches, "id", "name");
             return View();
         }
@@ -48,7 +61,7 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="username,password,email,address,branch_id,isAccessAll")] User user)
+        public ActionResult Create([Bind(Include = "username,password,email,address,branch_id,isAccessAll")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -64,6 +77,10 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         // GET: /Users/Edit/5
         public ActionResult Edit(string id)
         {
+            if (Session["isAccessAll"].Equals("False"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -82,10 +99,14 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="username,password,email,address,branch_id,isAccessAll")] User user)
+        public ActionResult Edit([Bind(Include = "username,password,email,address,branch_id,isAccessAll")] User user)
         {
             if (ModelState.IsValid)
             {
+                if (Session["username"].Equals(user.username))
+                {
+                    user.isAccessAll = true;
+                }
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -97,6 +118,10 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         // GET: /Users/Delete/5
         public ActionResult Delete(string id)
         {
+            if (Session["isAccessAll"].Equals("False"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -117,6 +142,14 @@ namespace Inspinia_MVC5_SeedProject.Controllers
             User user = db.Users.Find(id);
             db.Users.Remove(user);
             db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult ResetPassword(string id)
+        {
+            User user = db.Users.Find(id);
+            user.password = user.username;
+            db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

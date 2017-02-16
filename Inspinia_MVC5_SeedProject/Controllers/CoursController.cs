@@ -18,6 +18,11 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         public ActionResult Index()
         {
             var courses = db.Courses.Include(c => c.Branch);
+            if (Session["isAccessAll"].Equals("False"))
+            {
+                int a = db.Users.Find(Session["username"]).branch_id;
+                return View(courses.Where(c => c.branch_id == a));
+            }
             return View(courses.ToList());
         }
 
@@ -48,10 +53,15 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="id,name,branch_id,key")] Cours cours)
+        public ActionResult Create([Bind(Include = "id,name,branch_id,key")] Cours cours)
         {
             if (ModelState.IsValid)
             {
+                if (Session["isAccessAll"].Equals("False"))
+                {
+                    int a = db.Users.Find(Session["username"]).branch_id;
+                    cours.branch_id = a;
+                }
                 db.Courses.Add(cours);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,7 +92,7 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="id,name,branch_id,key")] Cours cours)
+        public ActionResult Edit([Bind(Include = "id,name,branch_id,key")] Cours cours)
         {
             if (ModelState.IsValid)
             {

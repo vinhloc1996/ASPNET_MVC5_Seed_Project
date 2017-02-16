@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 namespace Inspinia_MVC5_SeedProject.Models
 {
     using System;
@@ -17,14 +19,15 @@ namespace Inspinia_MVC5_SeedProject.Models
         }
 
         public int id { get; set; }
-
+        [DisplayName("Course Name")]
         [Required]
         [StringLength(120)]
         public string name { get; set; }
-
+        [DisplayName("Branch")]
         public int branch_id { get; set; }
 
         [Required]
+        [DisplayName("Key for enrollment")]
         [StringLength(100)]
         public string key { get; set; }
 

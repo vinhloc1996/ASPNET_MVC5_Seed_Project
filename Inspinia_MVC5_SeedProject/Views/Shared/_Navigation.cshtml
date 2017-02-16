@@ -35,11 +35,19 @@
                     <i class="fa fa-laptop"></i> <span class="nav-label">Manage</span><span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level collapse">
-                    <li class="@Html.IsSelected(action: "Index")">
-                        <a href="@Url.Action("Index", "Branches")">
-                            Branches
-                        </a>
-                    </li>
+                    @{
+                        if (Session["isAccessAll"] != null)
+                        {
+                            if (Session["isAccessAll"].Equals("True"))
+                            {
+                                <li class="@Html.IsSelected(action: "Index")">
+                                    <a href="@Url.Action("Index", "Branches")">
+                                        Branches
+                                    </a>
+                                </li>
+                            }
+                        }
+                    }
                     <li class="@Html.IsSelected(action: "Index")">
                         <a href="@Url.Action("Index", "Students")">
                             Students

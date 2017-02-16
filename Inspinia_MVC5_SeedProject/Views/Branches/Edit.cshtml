@@ -1,7 +1,7 @@
 ﻿@model Inspinia_MVC5_SeedProject.Models.Branch
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit " + Model.name;
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -18,12 +18,10 @@
     </div>
     <div class="col-sm-8">
         <div class="title-action">
-			@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary"})
+            @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-primary"})
         </div>
     </div>
 </div>
-
-
 
 
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -31,59 +29,58 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Edit Branch</h5>
+                    <h5>Edit @Model.name</h5>
                 </div>
                 <div class="ibox-content">
 
-				@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
 
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.id)
+                        <div class="form-horizontal">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.name)
-                @Html.ValidationMessageFor(model => model.name)
-            </div>
-        </div>
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(model => model.id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.address, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.address)
-                @Html.ValidationMessageFor(model => model.address)
-            </div>
-        </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.name, new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.name)
+                                    @Html.ValidationMessageFor(model => model.name)
+                                </div>
+                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.create_date, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.create_date)
-                @Html.ValidationMessageFor(model => model.create_date)
-            </div>
-        </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.address, new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.address)
+                                    @Html.ValidationMessageFor(model => model.address)
+                                </div>
+                            </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary" />
-				@Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-white"})
-            </div>
-        </div>
-    </div>
-}
+                            <div class="form-group" style="display: none">
+                                @Html.LabelFor(model => model.create_date, new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.create_date)
+                                    @Html.ValidationMessageFor(model => model.create_date)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Save" class="btn btn-primary"/>
+                                    @Html.ActionLink("Cancel", "Index", null, new {@class = "btn btn-white"})
+                                </div>
+                            </div>
+                        </div>
+                    }
 
 
                 </div>
             </div>
         </div>
     </div>
- </div>
-
+</div>
 
 
 @section Scripts {

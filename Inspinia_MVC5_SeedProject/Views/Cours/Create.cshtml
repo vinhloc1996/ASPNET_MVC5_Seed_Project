@@ -18,11 +18,10 @@
     </div>
     <div class="col-sm-8">
         <div class="title-action">
-			@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary"})
+            @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-primary"})
         </div>
     </div>
 </div>
-
 
 
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -34,53 +33,57 @@
                 </div>
                 <div class="ibox-content">
 
-				@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true)
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.name)
-                @Html.ValidationMessageFor(model => model.name)
-            </div>
-        </div>
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.branch_id, "branch_id", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("branch_id", String.Empty)
-                @Html.ValidationMessageFor(model => model.branch_id)
-            </div>
-        </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.name, new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.name)
+                                    @Html.ValidationMessageFor(model => model.name)
+                                </div>
+                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.key, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.key)
-                @Html.ValidationMessageFor(model => model.key)
-            </div>
-        </div>
+                            @{
+                                if (Session["isAccessAll"].Equals("True"))
+                                {
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.branch_id, "Branch", new {@class = "control-label col-md-2"})
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("branch_id")
+                                            @Html.ValidationMessageFor(model => model.branch_id)
+                                        </div>
+                                    </div>
+                                }
+                            }
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-primary" />
-				@Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-white"})
-            </div>
-        </div>
-    </div>
-}
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.key, new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.key)
+                                    @Html.ValidationMessageFor(model => model.key)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Create" class="btn btn-primary"/>
+                                    @Html.ActionLink("Cancel", "Index", null, new {@class = "btn btn-white"})
+                                </div>
+                            </div>
+                        </div>
+                    }
 
                 </div>
             </div>
         </div>
     </div>
- </div>
+</div>
 
- 
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

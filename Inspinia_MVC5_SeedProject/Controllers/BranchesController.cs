@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Inspinia_MVC5_SeedProject.Models;
 
@@ -22,15 +18,13 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         // GET: /Branches
         public ActionResult Index()
         {
-            //            if (isAdmin(Session["username"].ToString()))
-            //            {
-            //                return View(db.Branches.ToList());
-            //            }
-            //            else
-            //            {
-            //                int id = db.Users.Find(Session["username"]).branch_id;
-            //                return View(db.Branches.Where(x => x.id == id));
-            //            }
+            if (!isAdmin(Session["username"].ToString()))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+//
+//            return View(db.Branches.Where(x => x.id == db.Users.Find(Session["username"]).branch_id));
+
             return View(db.Branches.ToList());
         }
 

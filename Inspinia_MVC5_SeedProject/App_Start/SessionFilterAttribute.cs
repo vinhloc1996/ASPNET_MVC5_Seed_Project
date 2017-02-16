@@ -14,7 +14,7 @@ namespace Inspinia_MVC5_SeedProject
             var route = filterContext.HttpContext.Request.RequestContext.RouteData;
             var username = filterContext.HttpContext.Session.Contents["username"];
 
-            if ("Users Branches Students Cours".Contains(route.GetRequiredString("controller")) && username == null)
+            if ("Users Branches Students Cours".ToLower().Contains(route.GetRequiredString("controller").ToLower()) && username == null)
             {
                 RouteValueDictionary redirectTargetDictionary = new RouteValueDictionary();
                 redirectTargetDictionary.Add("action", "Login");

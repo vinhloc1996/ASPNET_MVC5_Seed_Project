@@ -18,6 +18,11 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         public ActionResult Index()
         {
             var students = db.Students.Include(s => s.Branch);
+            if (Session["isAccessAll"].Equals("False"))
+            {
+                int a = db.Users.Find(Session["username"]).branch_id;
+                return View(students.Where(s => s.branch_id == a));
+            }
             return View(students.ToList());
         }
 
@@ -48,10 +53,15 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="id,password,fullname,DOB,address,email,branch_id")] Student student)
+        public ActionResult Create([Bind(Include = "id,password,fullname,DOB,address,email,branch_id")] Student student)
         {
             if (ModelState.IsValid)
             {
+                if (Session["isAccessAll"].Equals("False"))
+                {
+                    int a = db.Users.Find(Session["username"]).branch_id;
+                    student.branch_id = a;
+                }
                 db.Students.Add(student);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,7 +92,7 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="id,password,fullname,DOB,address,email,branch_id")] Student student)
+        public ActionResult Edit([Bind(Include = "id,password,fullname,DOB,address,email,branch_id")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -117,6 +127,15 @@ namespace Inspinia_MVC5_SeedProject.Controllers
             Student student = db.Students.Find(id);
             db.Students.Remove(student);
             db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult ResetPassword(int id)
+        {
+            Student student = db.Students.Find(id);
+            student.password = student.email;
+            db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

@@ -1,7 +1,7 @@
 ﻿@model Inspinia_MVC5_SeedProject.Models.Branch
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detail " + Model.name;
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -19,64 +19,49 @@
 </div>
 
 
-
-
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Details Branch</h5>
+                    <h5>Detail</h5>
                 </div>
                 <div class="ibox-content">
 
 
-				    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.name)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.name)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.address)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.address)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.address)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.address)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.create_date)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.create_date)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.create_date)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.create_date)
+                        </dd>
 
-    </dl>
+                    </dl>
 
 
-	    @Html.ActionLink("Edit", "Edit", new { id = Model.id }, new { @class = "btn btn-primary"})
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-white"})
+                    @Html.ActionLink("Edit", "Edit", new {id = Model.id}, new {@class = "btn btn-primary"})
+                    @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-white"})
 
                 </div>
             </div>
         </div>
     </div>
- </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
