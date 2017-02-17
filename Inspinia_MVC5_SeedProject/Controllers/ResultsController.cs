@@ -53,12 +53,21 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                Enrollment enrollment = db.Enrollments.FirstOrDefault(r => r.student_id == result.student_id && r.course_id == result.course_id);
+                Enrollment enrollment = db.Enrollments.FirstOrDefault(e => e.student_id == result.student_id && e.course_id == result.course_id);
+                
                 if (enrollment != null)
                 {
-                    db.Results.Add(result);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    Result resultExisted = db.Results.FirstOrDefault(r => r.student_id == result.student_id && r.course_id == result.course_id);
+                    if (resultExisted == null)
+                    {
+                        db.Results.Add(result);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Student was got the result already.");
+                    }
                 }
                 else
                 {

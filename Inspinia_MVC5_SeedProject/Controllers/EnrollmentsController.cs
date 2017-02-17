@@ -41,7 +41,7 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         {
             ViewBag.course_id = new SelectList(db.Courses, "id", "name");
             ViewBag.student_id = new SelectList(db.Students, "id", "email");
-            
+
             return View();
         }
 
@@ -50,13 +50,23 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="student_id,course_id,create_date,isPresent")] Enrollment enrollment)
+        public ActionResult Create([Bind(Include = "student_id,course_id,create_date,isPresent")] Enrollment enrollment)
         {
             if (ModelState.IsValid)
             {
-                db.Enrollments.Add(enrollment);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                Enrollment enrollmentExisted =
+                    db.Enrollments.FirstOrDefault(
+                        e => e.student_id == enrollment.student_id && e.course_id == enrollment.course_id);
+                if (enrollmentExisted == null)
+                {
+                    db.Enrollments.Add(enrollment);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Student was enrolled this course already.");
+                }
             }
 
             ViewBag.course_id = new SelectList(db.Courses, "id", "name", enrollment.course_id);
@@ -86,7 +96,7 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="student_id,course_id,create_date,isPresent")] Enrollment enrollment)
+        public ActionResult Edit([Bind(Include = "student_id,course_id,create_date,isPresent")] Enrollment enrollment)
         {
             if (ModelState.IsValid)
             {
@@ -120,9 +130,21 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         public ActionResult DeleteConfirmed(int sid, int cid)
         {
             Enrollment enrollment = db.Enrollments.First(e => e.student_id == sid && e.course_id == cid);
-            db.Enrollments.Remove(enrollment);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                Result resultExisted = db.Results.FirstOrDefault(r => r.student_id == sid && r.course_id == cid);
+                if (resultExisted == null)
+                {
+                    db.Enrollments.Remove(enrollment);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Student was got the result already, cannot delete this record.");
+                }
+            }
+            return View(enrollment);
         }
 
         protected override void Dispose(bool disposing)

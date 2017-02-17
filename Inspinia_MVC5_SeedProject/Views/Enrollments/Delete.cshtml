@@ -79,7 +79,7 @@
                     @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
-
+                        @Html.ValidationSummary(true)
                         <div class="form-actions no-color">
                             <input type="submit" value="Delete" class="btn btn-primary"/>
                             @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-white"})
