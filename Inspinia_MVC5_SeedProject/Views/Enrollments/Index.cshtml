@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Inspinia_MVC5_SeedProject.Models.Student>
+﻿@model IEnumerable<Inspinia_MVC5_SeedProject.Models.Enrollment>
 
 @{
     ViewBag.Title = "Index";
@@ -9,7 +9,7 @@
         <h2>Index</h2>
         <ol class="breadcrumb">
             <li class="active">
-                <strong>Student</strong>
+                <strong>Enrollment & Attendance</strong>
             </li>
         </ol>
     </div>
@@ -21,29 +21,27 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>List of Student</h5>
+                    <h5>List of Enrollment</h5>
                     <div class="ibox-tools">
                         @Html.ActionLink("Create New", "Create", null, new {@class = "btn btn-primary btn-xs"})
                     </div>
                 </div>
+
                 <div class="ibox-content">
 
                     <table class="table table-striped">
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Branch.name)
+                                @Html.DisplayNameFor(model => model.Cours.name)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.fullname)
+                                @Html.DisplayNameFor(model => model.Student.email)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.DOB)
+                                @Html.DisplayNameFor(model => model.create_date)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.address)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.email)
+                                @Html.DisplayNameFor(model => model.isPresent)
                             </th>
                             <th></th>
                         </tr>
@@ -52,25 +50,21 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Branch.name)
+                                    @Html.DisplayFor(modelItem => item.Cours.name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.fullname)
+                                    @Html.DisplayFor(modelItem => item.Student.email)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.DOB)
+                                    @Html.DisplayFor(modelItem => item.create_date)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.address)
+                                    @Html.DisplayFor(modelItem => item.isPresent)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.email)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Details", "Details", new {id = item.id}, new {@class = "btn btn-primary btn-sm"})
-                                    @Html.ActionLink("Edit", "Edit", new {id = item.id}, new {@class = "btn btn-white btn-sm"})
-                                    @Html.ActionLink("Delete", "Delete", new {id = item.id}, new {@class = "btn btn-white btn-sm"})
-@*                                    @Html.ActionLink("Reset Password", "ResetPassword", new { id = item.id }, new { @class = "btn btn-info btn-sm" })*@
+                                    @Html.ActionLink("Details", "Details", new {sid = item.student_id, cid = item.course_id}, new {@class = "btn btn-primary btn-sm"})
+                                    @Html.ActionLink("Edit", "Edit", new {sid = item.student_id, cid = item.course_id}, new {@class = "btn btn-white btn-sm"})
+                                    @Html.ActionLink("Delete", "Delete", new {sid = item.student_id, cid = item.course_id}, new {@class = "btn btn-white btn-sm"})
                                 </td>
                             </tr>
                         }

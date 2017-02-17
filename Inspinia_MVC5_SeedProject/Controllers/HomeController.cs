@@ -29,20 +29,20 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         [HttpPost]
         public ActionResult Login(User loginUser, string returnUrl)
         {
-            User user = GetUser(loginUser.username, loginUser.password);
-            if (user != null)
-            {
-                Session["username"] = user.username;
-                Session["isAccessAll"] = user.isAccessAll.ToString();
-                Session["branch_id"] = user.branch_id;
+                User user = GetUser(loginUser.username, loginUser.password);
+                if (user != null)
+                {
+                    Session["username"] = user.username;
+                    Session["isAccessAll"] = user.isAccessAll.ToString();
+                    Session["branch_id"] = user.branch_id;
 
-                return RedirectToLocal(returnUrl);
-            }
-            else
-            {
-                ModelState.AddModelError("", "Login details are wrong.");
-            }
-            return View(user);
+                    return RedirectToLocal(returnUrl);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Login details are wrong.");
+                }
+                return View(user);
         }
 
         private ActionResult RedirectToLocal(string returnUrl)
@@ -74,11 +74,40 @@ namespace Inspinia_MVC5_SeedProject.Controllers
             return null;
         }
 
+        private Student GetStudent(string username, string password)
+        {
+            using (var db = new ABContext())
+            {
+                var student = db.Students.FirstOrDefault(u => u.email == username);
+                if (student != null)
+                {
+                    if (student.password == password)
+                    {
+                        return student;
+                    }
+                }
+            }
+            return null;
+        }
+
         public ActionResult LogOut()
         {
 //            FormsAuthentication.SignOut();
             Session.Clear();
             return RedirectToAction("Login", "Home");
+        }
+
+        public bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

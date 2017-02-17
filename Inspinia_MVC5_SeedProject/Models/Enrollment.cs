@@ -1,3 +1,5 @@
+﻿using System.ComponentModel;
+
 namespace Inspinia_MVC5_SeedProject.Models
 {
     using System;
@@ -18,10 +20,14 @@ namespace Inspinia_MVC5_SeedProject.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int course_id { get; set; }
 
+
+        [DisplayName("Date Created")]
         [Column(TypeName = "date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime create_date { get; set; }
 
-        public bool? isPresent { get; set; }
+        [DisplayName("Present")]
+        public bool isPresent { get; set; }
 
         public virtual Cours Cours { get; set; }
 

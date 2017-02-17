@@ -8,9 +8,6 @@ namespace Inspinia_MVC5_SeedProject
 
         public static void RegisterBundles(BundleCollection bundles)
         {
-
-
-
             // Vendor scripts
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-3.1.1.min.js"));
