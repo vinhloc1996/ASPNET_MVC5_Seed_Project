@@ -73,6 +73,16 @@
                             Result
                         </a>
                     </li>
+                    <li class="@Html.IsSelected(action: "Index")">
+                        <a href="@Url.Action("Index", "Materials")">
+                            Material
+                        </a>
+                    </li>
+                    <li class="@Html.IsSelected(action: "Index")">
+                        <a href="@Url.Action("Index", "Schedules")">
+                            Schedule
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>

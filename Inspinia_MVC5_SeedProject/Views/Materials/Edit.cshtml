@@ -1,0 +1,83 @@
+﻿@model Inspinia_MVC5_SeedProject.Models.Material
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Edit</h2>
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("List", "Index")
+            </li>
+            <li class="active">
+                <strong>Edit</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+            @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-primary"})
+        </div>
+    </div>
+</div>
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Edit Material</h5>
+                </div>
+                <div class="ibox-content">
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(model => model.id)
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.course_id, "course_id", new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.DropDownList("course_id", String.Empty)
+                                    @Html.ValidationMessageFor(model => model.course_id)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.description, new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.TextAreaFor(model => model.description, new { style = "width: 200px; height: 100px;" })
+                                    @Html.ValidationMessageFor(model => model.description)
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="display: none">
+                                @Html.LabelFor(model => model.create_date, new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.create_date)
+                                    @Html.ValidationMessageFor(model => model.create_date)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Save" class="btn btn-primary"/>
+                                    @Html.ActionLink("Cancel", "Index", null, new {@class = "btn btn-white"})
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

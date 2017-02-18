@@ -16,6 +16,9 @@ namespace Inspinia_MVC5_SeedProject.Models
         {
             Enrollments = new HashSet<Enrollment>();
             Results = new HashSet<Result>();
+            Schedules = new HashSet<Schedule>();
+            Materials = new HashSet<Material>();
+
         }
 
         public int id { get; set; }
@@ -38,5 +41,11 @@ namespace Inspinia_MVC5_SeedProject.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Result> Results { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Schedule> Schedules { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Material> Materials { get; set; }
     }
 }

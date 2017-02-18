@@ -23,7 +23,7 @@ namespace Inspinia_MVC5_SeedProject.Controllers
                 int a = db.Users.Find(Session["username"]).branch_id;
                 return View(users.Where(c => c.branch_id == a));
             }
-                return View(users.ToList());
+            return View(users.ToList());
         }
 
         // GET: /Users/Details/5
@@ -144,6 +144,7 @@ namespace Inspinia_MVC5_SeedProject.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
         public ActionResult ResetPassword(string id)
         {
             User user = db.Users.Find(id);

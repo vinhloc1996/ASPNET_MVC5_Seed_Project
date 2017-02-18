@@ -18,6 +18,8 @@ namespace Inspinia_MVC5_SeedProject.Models
         public virtual DbSet<Result> Results { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Material> Materials { get; set; }
+        public virtual DbSet<Schedule> Schedules { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -67,6 +69,18 @@ namespace Inspinia_MVC5_SeedProject.Models
                 .HasForeignKey(e => e.course_id)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Cours>()
+                .HasMany(e => e.Materials)
+                .WithRequired(e => e.Cours)
+                .HasForeignKey(e => e.course_id)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Cours>()
+                .HasMany(e => e.Schedules)
+                .WithRequired(e => e.Cours)
+                .HasForeignKey(e => e.course_id)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Student>()
                 .Property(e => e.password)
                 .IsUnicode(false);
@@ -101,6 +115,10 @@ namespace Inspinia_MVC5_SeedProject.Models
 
             modelBuilder.Entity<User>()
                 .Property(e => e.address)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Material>()
+                .Property(e => e.description)
                 .IsUnicode(false);
         }
     }

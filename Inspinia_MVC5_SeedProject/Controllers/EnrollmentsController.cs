@@ -18,6 +18,14 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         public ActionResult Index()
         {
             var enrollments = db.Enrollments.Include(e => e.Cours).Include(e => e.Student);
+//            if (Session["isAccessAll"].Equals("False"))
+//            {
+//                int a = db.Users.Find(Session["username"]).branch_id;
+//                var course = db.Courses.Where(c => c.branch_id == a);
+//                var student = db.Students.Where(s => s.branch_id == a);
+//
+//                return View(enrollments.Where(e => e.course_id == 0));
+//            }
             return View(enrollments.ToList());
         }
 

@@ -187,10 +187,12 @@
     <Compile Include="App_Start\SessionFilterAttribute.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\EnrollmentsController.cs" />
+    <Compile Include="Controllers\MaterialsController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\BranchesController.cs" />
     <Compile Include="Controllers\CoursController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SchedulesController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -201,7 +203,9 @@
     <Compile Include="Models\Branch.cs" />
     <Compile Include="Models\Cours.cs" />
     <Compile Include="Models\Enrollment.cs" />
+    <Compile Include="Models\Material.cs" />
     <Compile Include="Models\Result.cs" />
+    <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
@@ -211,10 +215,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\aspnet-Inspinia_MVC5_SeedProject-20141215093835.mdf" />
-    <Content Include="App_Data\aspnet-Inspinia_MVC5_SeedProject-20141215093835_log.ldf">
-      <DependentUpon>aspnet-Inspinia_MVC5_SeedProject-20141215093835.mdf</DependentUpon>
-    </Content>
     <Content Include="bin\Inspinia_MVC5_SeedProject.dll" />
     <Content Include="bin\Inspinia_MVC5_SeedProject.pdb" />
     <Content Include="bin\Newtonsoft.Json.dll" />
@@ -355,12 +355,25 @@
     <Content Include="Views\Enrollments\Details.cshtml" />
     <Content Include="Views\Enrollments\Edit.cshtml" />
     <Content Include="Views\Enrollments\Index.cshtml" />
+    <Content Include="Views\Materials\Create.cshtml" />
+    <Content Include="Views\Materials\Delete.cshtml" />
+    <Content Include="Views\Materials\Details.cshtml" />
+    <Content Include="Views\Materials\Edit.cshtml" />
+    <Content Include="Views\Materials\Index.cshtml" />
+    <Content Include="Views\Schedules\Create.cshtml" />
+    <Content Include="Views\Schedules\Delete.cshtml" />
+    <Content Include="Views\Schedules\Details.cshtml" />
+    <Content Include="Views\Schedules\Edit.cshtml" />
+    <Content Include="Views\Schedules\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
