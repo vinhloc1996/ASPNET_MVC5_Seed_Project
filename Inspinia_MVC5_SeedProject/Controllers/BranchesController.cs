@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -6,6 +8,7 @@ using Inspinia_MVC5_SeedProject.Models;
 
 namespace Inspinia_MVC5_SeedProject.Controllers
 {
+    [HandleError]
     public class BranchesController : Controller
     {
         private ABContext db = new ABContext();
@@ -117,10 +120,22 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Branch branch = db.Branches.Find(id);
-            db.Branches.Remove(branch);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                Branch branch = db.Branches.Find(id);
+                db.Branches.Remove(branch);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException dbe)
+            {
+                return RedirectToAction("Error", "Home",
+                    new
+                    {
+                        msg =
+                        "Your error occured in Branches controller when call action Delete. You cannot delete this branch because of using the relationship with other tables."
+                    });
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -131,5 +146,20 @@ namespace Inspinia_MVC5_SeedProject.Controllers
             }
             base.Dispose(disposing);
         }
+
+//        protected override void OnException(ExceptionContext filterContext)
+//        {
+//            if (!filterContext.ExceptionHandled)
+//            {
+//                string controller = filterContext.RouteData.Values["controller"].ToString();
+//                string action = filterContext.RouteData.Values["action"].ToString();
+//                Exception ex = filterContext.Exception;
+////                ViewBag.ControllerErr = controller;
+////                ViewBag.ActionErr = action;
+////                ViewBag.ExceptionErr = ex;
+//                RedirectToAction("Error", "Home", new {msg = "Your error occured in " + controller + " controller when call action " + action + " .\nError details is: " + ex.StackTrace});
+//            }
+//            base.OnException(filterContext);
+//        }
     }
 }

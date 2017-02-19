@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Inspinia_MVC5_SeedProject.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace Inspinia_MVC5_SeedProject.Controllers
 {
@@ -18,28 +19,34 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         public ActionResult Index()
         {
             var schedules = db.Schedules.Include(s => s.Cours);
-            return View(schedules.ToList());
+            if (Session["isAccessAll"].Equals("False"))
+            {
+                int a = db.Users.Find(Session["username"]).branch_id;
+                return View(schedules.Where(s => s.Cours.branch_id == a).DistinctBy(s => s.course_id));
+            }
+                return View(schedules.DistinctBy(s => s.course_id));
         }
 
         // GET: /Schedules/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? cid)
         {
-            if (id == null)
+            if (cid == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Schedule schedule = db.Schedules.Find(id);
-            if (schedule == null)
-            {
-                return HttpNotFound();
-            }
+            var schedule = db.Schedules.Where(s => s.course_id == cid);
+//            if (schedule == null)
+//            {
+//                return HttpNotFound();
+//            }
             return View(schedule);
         }
 
         // GET: /Schedules/Create
         public ActionResult Create()
         {
-            ViewBag.course_id = new SelectList(db.Courses, "id", "name");
+            int a = db.Users.Find(Session["username"]).branch_id;
+            ViewBag.course_id = new SelectList(db.Courses.Where(c => c.branch_id == a), "id", "name");
             return View();
         }
 
@@ -56,8 +63,8 @@ namespace Inspinia_MVC5_SeedProject.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.course_id = new SelectList(db.Courses, "id", "name", schedule.course_id);
+            int a = db.Users.Find(Session["username"]).branch_id;
+            ViewBag.course_id = new SelectList(db.Courses.Where(c => c.branch_id == a), "id", "name", schedule.course_id);
             return View(schedule);
         }
 
@@ -73,7 +80,8 @@ namespace Inspinia_MVC5_SeedProject.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.course_id = new SelectList(db.Courses, "id", "name", schedule.course_id);
+            int a = db.Users.Find(Session["username"]).branch_id;
+            ViewBag.course_id = new SelectList(db.Courses.Where(c => c.branch_id == a), "id", "name", schedule.course_id);
             return View(schedule);
         }
 
@@ -90,7 +98,8 @@ namespace Inspinia_MVC5_SeedProject.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.course_id = new SelectList(db.Courses, "id", "name", schedule.course_id);
+            int a = db.Users.Find(Session["username"]).branch_id;
+            ViewBag.course_id = new SelectList(db.Courses.Where(c => c.branch_id == a), "id", "name", schedule.course_id);
             return View(schedule);
         }
 

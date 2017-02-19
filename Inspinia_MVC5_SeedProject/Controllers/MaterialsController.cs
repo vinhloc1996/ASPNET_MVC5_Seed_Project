@@ -21,7 +21,8 @@ namespace Inspinia_MVC5_SeedProject.Controllers
             if (Session["isAccessAll"].Equals("False"))
             {
                 int a = db.Users.Find(Session["username"]).branch_id;
-                return View(materials.Where(m => m.course_id == a));
+//                var coures_id = db.Courses.Where(c => c.branch_id == a);
+                return View(materials.Where(m => m.Cours.branch_id == a));
             }
             return View(materials.ToList());
         }
@@ -44,7 +45,8 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         // GET: /Materials/Create
         public ActionResult Create()
         {
-            ViewBag.course_id = new SelectList(db.Courses, "id", "name");
+            int a = db.Users.Find(Session["username"]).branch_id;
+            ViewBag.course_id = new SelectList(db.Courses.Where(c => c.branch_id == a), "id", "name");
             return View();
         }
 
@@ -61,8 +63,8 @@ namespace Inspinia_MVC5_SeedProject.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.course_id = new SelectList(db.Courses, "id", "name", material.course_id);
+            int a = db.Users.Find(Session["username"]).branch_id;
+            ViewBag.course_id = new SelectList(db.Courses.Where(c => c.branch_id == a), "id", "name", material.course_id);
             return View(material);
         }
 
@@ -78,7 +80,8 @@ namespace Inspinia_MVC5_SeedProject.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.course_id = new SelectList(db.Courses, "id", "name", material.course_id);
+            int a = db.Users.Find(Session["username"]).branch_id;
+            ViewBag.course_id = new SelectList(db.Courses.Where(c => c.branch_id == a), "id", "name", material.course_id);
             return View(material);
         }
 
@@ -95,7 +98,8 @@ namespace Inspinia_MVC5_SeedProject.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.course_id = new SelectList(db.Courses, "id", "name", material.course_id);
+            int a = db.Users.Find(Session["username"]).branch_id;
+            ViewBag.course_id = new SelectList(db.Courses.Where(c => c.branch_id == a), "id", "name", material.course_id);
             return View(material);
         }
 

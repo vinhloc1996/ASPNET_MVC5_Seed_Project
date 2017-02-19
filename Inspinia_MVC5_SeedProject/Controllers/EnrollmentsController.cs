@@ -18,14 +18,11 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         public ActionResult Index()
         {
             var enrollments = db.Enrollments.Include(e => e.Cours).Include(e => e.Student);
-//            if (Session["isAccessAll"].Equals("False"))
-//            {
-//                int a = db.Users.Find(Session["username"]).branch_id;
-//                var course = db.Courses.Where(c => c.branch_id == a);
-//                var student = db.Students.Where(s => s.branch_id == a);
-//
-//                return View(enrollments.Where(e => e.course_id == 0));
-//            }
+            if (Session["isAccessAll"].Equals("False"))
+            {
+                int a = db.Users.Find(Session["username"]).branch_id;
+                return View(enrollments.Where(e => e.Cours.branch_id == a && e.Student.branch_id == a));
+            }
             return View(enrollments.ToList());
         }
 
@@ -47,9 +44,9 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         // GET: /Enrollments/Create
         public ActionResult Create()
         {
-            ViewBag.course_id = new SelectList(db.Courses, "id", "name");
-            ViewBag.student_id = new SelectList(db.Students, "id", "email");
-
+            int a = db.Users.Find(Session["username"]).branch_id;
+            ViewBag.course_id = new SelectList(db.Courses.Where(c => c.branch_id == a), "id", "name");
+            ViewBag.student_id = new SelectList(db.Students.Where(s => s.branch_id == a), "id", "email");
             return View();
         }
 
@@ -76,9 +73,9 @@ namespace Inspinia_MVC5_SeedProject.Controllers
                     ModelState.AddModelError("", "Student was enrolled this course already.");
                 }
             }
-
-            ViewBag.course_id = new SelectList(db.Courses, "id", "name", enrollment.course_id);
-            ViewBag.student_id = new SelectList(db.Students, "id", "email", enrollment.student_id);
+            int a = db.Users.Find(Session["username"]).branch_id;
+            ViewBag.course_id = new SelectList(db.Courses.Where(c => c.branch_id == a), "id", "name", enrollment.course_id);
+            ViewBag.student_id = new SelectList(db.Students.Where(s => s.branch_id == a), "id", "email", enrollment.student_id);
             return View(enrollment);
         }
 
@@ -94,8 +91,9 @@ namespace Inspinia_MVC5_SeedProject.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.course_id = new SelectList(db.Courses, "id", "name", enrollment.course_id);
-            ViewBag.student_id = new SelectList(db.Students, "id", "email", enrollment.student_id);
+            int a = db.Users.Find(Session["username"]).branch_id;
+            ViewBag.course_id = new SelectList(db.Courses.Where(c => c.branch_id == a), "id", "name", enrollment.course_id);
+            ViewBag.student_id = new SelectList(db.Students.Where(s => s.branch_id == a), "id", "email", enrollment.student_id);
             return View(enrollment);
         }
 
@@ -112,8 +110,9 @@ namespace Inspinia_MVC5_SeedProject.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.course_id = new SelectList(db.Courses, "id", "name", enrollment.course_id);
-            ViewBag.student_id = new SelectList(db.Students, "id", "email", enrollment.student_id);
+            int a = db.Users.Find(Session["username"]).branch_id;
+            ViewBag.course_id = new SelectList(db.Courses.Where(c => c.branch_id == a), "id", "name", enrollment.course_id);
+            ViewBag.student_id = new SelectList(db.Students.Where(s => s.branch_id == a), "id", "email", enrollment.student_id);
             return View(enrollment);
         }
 

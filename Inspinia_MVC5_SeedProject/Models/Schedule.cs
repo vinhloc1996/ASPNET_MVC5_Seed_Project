@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 namespace Inspinia_MVC5_SeedProject.Models
 {
     using System;
@@ -12,7 +14,10 @@ namespace Inspinia_MVC5_SeedProject.Models
 
         public int course_id { get; set; }
 
+        [DisplayName("Date Learn")]
         [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime date_learn { get; set; }
 
         public virtual Cours Cours { get; set; }

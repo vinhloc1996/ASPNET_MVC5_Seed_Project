@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -10,6 +11,7 @@ using Inspinia_MVC5_SeedProject.Models;
 
 namespace Inspinia_MVC5_SeedProject.Controllers
 {
+    [HandleError]
     public class StudentsController : Controller
     {
         private ABContext db = new ABContext();
@@ -124,10 +126,22 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Student student = db.Students.Find(id);
-            db.Students.Remove(student);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                Student student = db.Students.Find(id);
+                db.Students.Remove(student);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException dbe)
+            {
+                return RedirectToAction("Error", "Home",
+                    new
+                    {
+                        msg =
+                        "Your error occured in Students controller when call action Delete. You cannot delete this branch because of using the relationship with other tables."
+                    });
+            }
         }
 
         public ActionResult ResetPassword(int id)

@@ -22,46 +22,44 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>List of Schedule</h5>
-					<div class="ibox-tools">
-						@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary btn-xs"})
-					</div>
+                    <div class="ibox-tools">
+                        @Html.ActionLink("Create New", "Create", null, new {@class = "btn btn-primary btn-xs"})
+                    </div>
                 </div>
                 <div class="ibox-content">
 
-<table class="table table-striped">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Cours.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.date_learn)
-        </th>
-        <th></th>
-    </tr>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Cours.name)
+                            </th>
+@*                            <th>*@
+@*                                @Html.DisplayNameFor(model => model.date_learn)*@
+@*                            </th>*@
+                            <th></th>
+                        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cours.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.date_learn)
-        </td>
-        <td>
-			@Html.ActionLink("Details", "Details", new { id=item.id }, new { @class = "btn btn-primary btn-sm"})
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }, new { @class = "btn btn-white btn-sm"})
-            @Html.ActionLink("Delete", "Delete", new { id=item.id }, new { @class = "btn btn-white btn-sm"})
-        </td>
-    </tr>
-}
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Cours.name)
+                                </td>
+@*                                <td>*@
+@*                                    @Html.DisplayFor(modelItem => item.date_learn)*@
+@*                                </td>*@
+                                <td>
+                                    @Html.ActionLink("Details", "Details", new {cid = item.Cours.id}, new {@class = "btn btn-primary btn-sm"})
+@*                                    @Html.ActionLink("Edit", "Edit", new {id = item.id}, new {@class = "btn btn-white btn-sm"})*@
+@*                                    @Html.ActionLink("Delete", "Delete", new {id = item.id}, new {@class = "btn btn-white btn-sm"})*@
+                                </td>
+                            </tr>
+                        }
 
-</table>
+                    </table>
 
                 </div>
             </div>
         </div>
     </div>
- </div>
-
-
-
+</div>

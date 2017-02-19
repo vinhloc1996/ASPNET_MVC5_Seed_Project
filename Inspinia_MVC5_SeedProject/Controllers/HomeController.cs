@@ -12,10 +12,9 @@ namespace Inspinia_MVC5_SeedProject.Controllers
     {
         public ActionResult Index()
         {
-            ViewData["SubTitle"] = "Welcome in ASP.NET MVC 5 INSPINIA SeedProject ";
+            ViewData["SubTitle"] = "Welcome to ABEducation Project ";
             ViewData["Message"] =
-                "It is an application skeleton for a typical MVC 5 project. You can use it to quickly bootstrap your webapp projects.";
-
+                "This project is made by Loc Nguyen. The project is open source at https://github.com/vinhloc1996/ASPNET_MVC5_Seed_Project";
             return View();
         }
 
@@ -95,6 +94,12 @@ namespace Inspinia_MVC5_SeedProject.Controllers
 //            FormsAuthentication.SignOut();
             Session.Clear();
             return RedirectToAction("Login", "Home");
+        }
+
+        public ActionResult Error(string msg)
+        {
+            ViewBag.err = msg;
+            return View();
         }
 
         public bool IsValidEmail(string email)

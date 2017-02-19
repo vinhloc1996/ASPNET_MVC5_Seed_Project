@@ -18,7 +18,7 @@
     </div>
     <div class="col-sm-8">
         <div class="title-action">
-			@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary"})
+            @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-primary"})
         </div>
     </div>
 </div>
@@ -33,42 +33,40 @@
                 </div>
                 <div class="ibox-content">
 
-				@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true)
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.course_id, "course_id", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("course_id", String.Empty)
-                @Html.ValidationMessageFor(model => model.course_id)
-            </div>
-        </div>
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.date_learn, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.date_learn)
-                @Html.ValidationMessageFor(model => model.date_learn)
-            </div>
-        </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.course_id, "Course", new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.DropDownList("course_id")
+                                    @Html.ValidationMessageFor(model => model.course_id)
+                                </div>
+                            </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-primary" />
-				@Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-white"})
-            </div>
-        </div>
-    </div>
-}
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.date_learn, new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.date_learn)
+                                    @Html.ValidationMessageFor(model => model.date_learn)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Create" class="btn btn-primary"/>
+                                    @Html.ActionLink("Cancel", "Index", null, new {@class = "btn btn-white"})
+                                </div>
+                            </div>
+                        </div>
+                    }
 
                 </div>
             </div>
         </div>
     </div>
- </div>
-
- 
+</div>
